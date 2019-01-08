@@ -49,8 +49,6 @@ public class LoginPage {
 			XSSFSheet sheet = workbook.getSheetAt(0);
 			usernameEmailFB = sheet.getRow(1).getCell(0).getStringCellValue();
 			passwordEmailFB = sheet.getRow(1).getCell(1).getStringCellValue();
-		
-			Thread.sleep(2000);
 			String parentWindows = driver.getWindowHandle();
 			Set<String> it = driver.getWindowHandles();
 
@@ -58,15 +56,22 @@ public class LoginPage {
 				if (!childWindows.equalsIgnoreCase(parentWindows)) {
 					driver.switchTo().window(childWindows);
 					Thread.sleep(2000);
+				//WebDriverWait wait = new WebDriverWait(d,10);
 					driver.findElement(By.id("email")).sendKeys(usernameEmailFB);
 					driver.findElement(By.id("pass")).sendKeys(passwordEmailFB);
 					excelTinder.close();
 					driver.findElement(By.id("u_0_0")).click();
-					Thread.sleep(1000);
+					Thread.sleep(3000);
 					driver.switchTo().window(parentWindows);
 					driver.findElement(By.xpath("/html/body/div[1]/div/span/div/div[2]/div/div/div[3]/button[1]"))
-					.click();
-					
+							.click();
+					Thread.sleep(2000);
+					driver.findElement(By.xpath("/html/body/div[1]/div/span/div/div[2]/div/div/div[3]/button[2]"))
+							.click();
+					Thread.sleep(2000);
+					driver.findElement(By.xpath(
+							"/html/body/div[1]/div/span/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[2]/button[4]"))
+							.click();
 
 				}
 			}
