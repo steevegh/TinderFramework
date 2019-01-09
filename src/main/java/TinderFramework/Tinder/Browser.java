@@ -14,21 +14,21 @@ import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class Browser {
-	
+
 	public static WebDriver driver;
-	
+
 	public static WebDriver setUpChrome() {
-		
+
 		return new ChromeDriver();
 	}
-	
+
 	public static WebDriver setUpFirefox() {
-		//Firefox with no information
+		// Firefox with no information
 		return new FirefoxDriver();
 	}
-	
+
 	public static WebDriver setUpFirefoxWithGeoLocation() {
-		//User Information already setup with geolocation
+		// User Information already setup with geolocation
 		FirefoxProfile geoEnabled = new FirefoxProfile();
 		geoEnabled.setPreference("geo.enabled", true);
 		geoEnabled.setPreference("geo.provider.use_corelocation", true);
@@ -38,15 +38,9 @@ public class Browser {
 	}
 
 	public static WebDriver setUpFirefoxWithProfile() {
-		//User Information already setup with geolocation and notification off
-		
-		/*FirefoxProfile geoEnabled = new FirefoxProfile();
-		geoEnabled.setPreference("geo.enabled", true);
-		geoEnabled.setPreference("geo.provider.use_corelocation", true);
-		geoEnabled.setPreference("geo.prompt.testing", true);
-		geoEnabled.setPreference("geo.prompt.testing.allow", true);*/
-		 ProfilesIni profile = new ProfilesIni();
-		 FirefoxProfile ffprofile = profile.getProfile("TinderProfile"); // LoginProfile is the firefox profile name
+		// User Information already setup with geolocation and notification off
+		ProfilesIni profile = new ProfilesIni();
+		FirefoxProfile ffprofile = profile.getProfile("TinderProfile"); // LoginProfile is the firefox profile name
 		return new FirefoxDriver(ffprofile);
 
 	}

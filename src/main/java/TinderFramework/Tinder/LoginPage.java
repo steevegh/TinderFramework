@@ -23,11 +23,12 @@ public class LoginPage {
 		this.driver = driver;
 	}
 
-	public String openPage() throws InterruptedException{
+	public String openPage() throws InterruptedException {
 		driver.navigate().to("https://tinder.com/");
 		try {
-			wait = new WebDriverWait(driver,15);
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='modal-manager']/div/div/div[2]/div/div[3]/div/button/span/span")));
+			wait = new WebDriverWait(driver, 15);
+			wait.until(ExpectedConditions.elementToBeClickable(
+					By.xpath("//div[@id='modal-manager']/div/div/div[2]/div/div[3]/div/button/span/span")));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,7 +42,7 @@ public class LoginPage {
 		String usernameEmailFB;
 		String passwordEmailFB;
 		try {
-			//wait.until(ExpectedConditions.presenceOfElementLocated(By.id("u_0_0")));
+			// wait.until(ExpectedConditions.presenceOfElementLocated(By.id("u_0_0")));
 			driver.findElement(By.xpath("//div[@id='modal-manager']/div/div/div[2]/div/div[3]/div/button/span/span"))
 					.click();
 
@@ -71,12 +72,12 @@ public class LoginPage {
 		}
 	}
 
-	
-	public String openPageTinderLogged() throws InterruptedException{
+	public String openPageTinderLogged() throws InterruptedException {
 		driver.navigate().to("https://tinder.com/");
 		try {
-			wait = new WebDriverWait(driver,15);
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div/span/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[1]/div[3]/span/div")));
+			wait = new WebDriverWait(driver, 15);
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+					"/html/body/div[1]/div/span/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[1]/div[3]/span/div")));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -84,21 +85,25 @@ public class LoginPage {
 		String tinderText = driver.getCurrentUrl();
 		return tinderText;
 	}
-	
-	/*public void SettingUpFirstAccessTinder() throws Exception {
 
-		wait.until(ExpectedConditions
-				.elementToBeClickable(By.xpath("/html/body/div[1]/div/span/div/div[2]/div/div/div[3]/button[1]")));
-		driver.findElement(By.xpath("/html/body/div[1]/div/span/div/div[2]/div/div/div[3]/button[1]")).click();
-		wait.until(ExpectedConditions
-				.elementToBeClickable(By.xpath("/html/body/div[1]/div/span/div/div[2]/div/div/div[3]/button[2]")));
-		driver.findElement(By.xpath("/html/body/div[1]/div/span/div/div[2]/div/div/div[3]/button[2]")).click();
-		wait.until(ExpectedConditions.elementToBeClickable(
-				By.xpath("/html/body/div[1]/div/span/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[2]/button[4]")));
-		driver.findElement(
-				By.xpath("/html/body/div[1]/div/span/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[2]/button[4]"))
-				.click();
-
-	}*/
+	/*
+	 * public void SettingUpFirstAccessTinder() throws Exception {
+	 * 
+	 * wait.until(ExpectedConditions .elementToBeClickable(By.xpath(
+	 * "/html/body/div[1]/div/span/div/div[2]/div/div/div[3]/button[1]")));
+	 * driver.findElement(By.xpath(
+	 * "/html/body/div[1]/div/span/div/div[2]/div/div/div[3]/button[1]")).click();
+	 * wait.until(ExpectedConditions .elementToBeClickable(By.xpath(
+	 * "/html/body/div[1]/div/span/div/div[2]/div/div/div[3]/button[2]")));
+	 * driver.findElement(By.xpath(
+	 * "/html/body/div[1]/div/span/div/div[2]/div/div/div[3]/button[2]")).click();
+	 * wait.until(ExpectedConditions.elementToBeClickable( By.xpath(
+	 * "/html/body/div[1]/div/span/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[2]/button[4]"
+	 * ))); driver.findElement( By.xpath(
+	 * "/html/body/div[1]/div/span/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[2]/button[4]"
+	 * )) .click();
+	 * 
+	 * }
+	 */
 
 }
