@@ -9,22 +9,26 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage {
 	public static XSSFWorkbook xlsfilepath;
 	public static XSSFSheet xlsSheetName;
 	public static XSSFCell Cell;
 	WebDriver driver;
+	WebDriverWait wait;
 
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
 	}
 
-	public String openPage() {
+	public String openPage() throws InterruptedException{
 		driver.navigate().to("https://tinder.com/");
 		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
+			wait = new WebDriverWait(driver,15);
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='modal-manager']/div/div/div[2]/div/div[3]/div/button/span/span")));
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -37,8 +41,7 @@ public class LoginPage {
 		String usernameEmailFB;
 		String passwordEmailFB;
 		try {
-
-			Thread.sleep(2000);
+			//wait.until(ExpectedConditions.presenceOfElementLocated(By.id("u_0_0")));
 			driver.findElement(By.xpath("//div[@id='modal-manager']/div/div/div[2]/div/div[3]/div/button/span/span"))
 					.click();
 
@@ -55,32 +58,47 @@ public class LoginPage {
 			for (String childWindows : it) {
 				if (!childWindows.equalsIgnoreCase(parentWindows)) {
 					driver.switchTo().window(childWindows);
-					Thread.sleep(2000);
-				//WebDriverWait wait = new WebDriverWait(d,10);
+					wait.until(ExpectedConditions.presenceOfElementLocated(By.id("email")));
 					driver.findElement(By.id("email")).sendKeys(usernameEmailFB);
 					driver.findElement(By.id("pass")).sendKeys(passwordEmailFB);
 					excelTinder.close();
 					driver.findElement(By.id("u_0_0")).click();
-					Thread.sleep(3000);
-					driver.switchTo().window(parentWindows);
-					driver.findElement(By.xpath("/html/body/div[1]/div/span/div/div[2]/div/div/div[3]/button[1]"))
-							.click();
-					Thread.sleep(2000);
-					driver.findElement(By.xpath("/html/body/div[1]/div/span/div/div[2]/div/div/div[3]/button[2]"))
-							.click();
-					Thread.sleep(2000);
-					driver.findElement(By.xpath(
-							"/html/body/div[1]/div/span/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[2]/button[4]"))
-							.click();
-
 				}
 			}
-
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-
 		}
-
 	}
+
+	
+	public String openPageTinderLogged() throws InterruptedException{
+		driver.navigate().to("https://tinder.com/");
+		try {
+			wait = new WebDriverWait(driver,15);
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div/span/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[1]/div[3]/span/div")));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String tinderText = driver.getCurrentUrl();
+		return tinderText;
+	}
+	
+	/*public void SettingUpFirstAccessTinder() throws Exception {
+
+		wait.until(ExpectedConditions
+				.elementToBeClickable(By.xpath("/html/body/div[1]/div/span/div/div[2]/div/div/div[3]/button[1]")));
+		driver.findElement(By.xpath("/html/body/div[1]/div/span/div/div[2]/div/div/div[3]/button[1]")).click();
+		wait.until(ExpectedConditions
+				.elementToBeClickable(By.xpath("/html/body/div[1]/div/span/div/div[2]/div/div/div[3]/button[2]")));
+		driver.findElement(By.xpath("/html/body/div[1]/div/span/div/div[2]/div/div/div[3]/button[2]")).click();
+		wait.until(ExpectedConditions.elementToBeClickable(
+				By.xpath("/html/body/div[1]/div/span/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[2]/button[4]")));
+		driver.findElement(
+				By.xpath("/html/body/div[1]/div/span/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[2]/button[4]"))
+				.click();
+
+	}*/
+
 }
