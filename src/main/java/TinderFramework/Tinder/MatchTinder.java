@@ -15,6 +15,7 @@ public class MatchTinder {
 
 	public void swipeRightTinder() {
 		try {
+			
 			wait = new WebDriverWait(driver, 15);
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 					"/html/body/div[1]/div/span/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[2]/button[4]")));
@@ -29,5 +30,6 @@ public class MatchTinder {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 }

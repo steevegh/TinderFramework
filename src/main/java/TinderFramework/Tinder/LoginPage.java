@@ -24,6 +24,7 @@ public class LoginPage {
 	}
 
 	public String openPage() throws InterruptedException {
+		// Open TinderPage
 		driver.navigate().to("https://tinder.com/");
 		try {
 			wait = new WebDriverWait(driver, 15);
@@ -47,12 +48,18 @@ public class LoginPage {
 					.click();
 
 			// Read an Excel file
+			// Access to the excel file
 			FileInputStream excelTinder = new FileInputStream(
 					new File("C:\\Users\\ghallabs\\Documents\\TestDataTinder.xlsx"));
+			// Open the excel file
 			XSSFWorkbook workbook = new XSSFWorkbook(excelTinder);
+			// Selecte the sheetname
 			XSSFSheet sheet = workbook.getSheetAt(0);
+			// Selecte the data
 			usernameEmailFB = sheet.getRow(1).getCell(0).getStringCellValue();
 			passwordEmailFB = sheet.getRow(1).getCell(1).getStringCellValue();
+			// register the page that is opened and set the iterator to interact with the
+			// FBpage that open for the sign in.
 			String parentWindows = driver.getWindowHandle();
 			Set<String> it = driver.getWindowHandles();
 

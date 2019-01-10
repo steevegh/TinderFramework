@@ -22,6 +22,15 @@ public class Browser {
 		return new ChromeDriver();
 	}
 
+	public static WebDriver setUpChromeProfileTinderLogged() {
+		String chromeProfilePath = "C:\\Users\\ghallabs\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1";
+		ChromeOptions chromeProfile = new ChromeOptions();
+		chromeProfile.addArguments("--user-data-dir=" + chromeProfilePath);
+		chromeProfile.addArguments("--disable-geolocation");
+		return new ChromeDriver(chromeProfile);
+
+	}
+	
 	public static WebDriver setUpFirefox() {
 		// Firefox with no information
 		return new FirefoxDriver();
