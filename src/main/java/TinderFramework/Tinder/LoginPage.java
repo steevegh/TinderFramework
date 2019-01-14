@@ -9,6 +9,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,19 +19,20 @@ public class LoginPage {
 	public static XSSFSheet xlsSheetName;
 	public static XSSFCell Cell;
 	WebDriver driver;
-	WebDriverWait wait;
+
 
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
 	}
-
+	 @FindBy(xpath = "//div[@id='modal-manager']/div/div/div[2]/div/div[3]/div/button/span/span") WebElement facebookButton;
+	 @FindBy(xpath = "/html/body/div[1]/div/span/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[2]/button[4]") WebElement likeButtonTinder;
+	
 	public String openPage() throws InterruptedException {
 		// Open TinderPage
 		driver.navigate().to("https://tinder.com/");
 		try {
-			wait = new WebDriverWait(driver, 15);
-			wait.until(ExpectedConditions.elementToBeClickable(
-					By.xpath("//div[@id='modal-manager']/div/div/div[2]/div/div[3]/div/button/span/span")));
+			WebDriverWait	wait  = new WebDriverWait(driver, 15);
+			wait.until(ExpectedConditions.elementToBeClickable(facebookButton));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,19 +46,16 @@ public class LoginPage {
 		String usernameEmailFB;
 		String passwordEmailFB;
 		try {
-			// wait.until(ExpectedConditions.presenceOfElementLocated(By.id("u_0_0")));
-			driver.findElement(By.xpath("//div[@id='modal-manager']/div/div/div[2]/div/div[3]/div/button/span/span"))
-					.click();
-
+			facebookButton.click();
 			// Read an Excel file
 			// Access to the excel file
 			FileInputStream excelTinder = new FileInputStream(
 					new File("C:\\Users\\ghallabs\\Documents\\TestDataTinder.xlsx"));
 			// Open the excel file
 			XSSFWorkbook workbook = new XSSFWorkbook(excelTinder);
-			// Selecte the sheetname
+			// Select the sheetname
 			XSSFSheet sheet = workbook.getSheetAt(0);
-			// Selecte the data
+			// Select the data
 			usernameEmailFB = sheet.getRow(1).getCell(0).getStringCellValue();
 			passwordEmailFB = sheet.getRow(1).getCell(1).getStringCellValue();
 			// register the page that is opened and set the iterator to interact with the
@@ -66,6 +66,7 @@ public class LoginPage {
 			for (String childWindows : it) {
 				if (!childWindows.equalsIgnoreCase(parentWindows)) {
 					driver.switchTo().window(childWindows);
+					WebDriverWait	wait  = new WebDriverWait(driver, 15);
 					wait.until(ExpectedConditions.presenceOfElementLocated(By.id("email")));
 					driver.findElement(By.id("email")).sendKeys(usernameEmailFB);
 					driver.findElement(By.id("pass")).sendKeys(passwordEmailFB);
@@ -79,12 +80,11 @@ public class LoginPage {
 		}
 	}
 
-	public String openPageTinderLogged() throws InterruptedException {
-		driver.navigate().to("https://tinder.com/");
+	public String openPageTinderLogged() {
+		driver.get("https://tinder.com/");
 		try {
-			wait = new WebDriverWait(driver, 15);
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-					"/html/body/div[1]/div/span/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[1]/div[3]/span/div")));
+			WebDriverWait wait  = new WebDriverWait(driver, 15);
+			wait.until(ExpectedConditions.elementToBeClickable(likeButtonTinder));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -109,8 +109,7 @@ public class LoginPage {
 	 * ))); driver.findElement( By.xpath(
 	 * "/html/body/div[1]/div/span/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[2]/button[4]"
 	 * )) .click();
-	 * 
-	 * }
+	 * } 
 	 */
 
 }

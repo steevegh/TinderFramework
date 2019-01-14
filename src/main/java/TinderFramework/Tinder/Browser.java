@@ -49,7 +49,7 @@ public class Browser {
 	public static WebDriver setUpFirefoxWithProfile() {
 		// User Information already setup with geolocation and notification off
 		ProfilesIni profile = new ProfilesIni();
-		FirefoxProfile ffprofile = profile.getProfile("TinderProfile"); // LoginProfile is the firefox profile name
+		FirefoxProfile ffprofile = profile.getProfile("NewTinder"); // LoginProfile is the firefox profile name
 		return new FirefoxDriver(ffprofile);
 
 	}
